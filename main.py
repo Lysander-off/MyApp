@@ -20,7 +20,7 @@ from plyer import fingerprint
 DEFAULT_NECESSITY_MAP = {
     "nourriture": 100,
     "logement": 100,
-    "matériel artistique": 80,
+    "matériel artistique": 80, 
     "transport": 70,
     "loisir": 30,
 }
