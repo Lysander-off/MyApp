@@ -10,25 +10,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # 1️⃣ Cloner le dépôt
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python
+    # 2️⃣ Installer git
+    - name: Installer git
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git
+        git --version
+
+    # 3️⃣ Configurer Python
+    - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.8'
 
-    - name: Install dependencies
+    # 4️⃣ Installer les dépendances Buildozer
+    - name: Installer Buildozer et dépendances
       run: |
-        sudo apt-get update
         sudo apt-get install -y python3-pip python3-dev build-essential openjdk-11-jdk zlib1g-dev libffi-dev
         pip3 install --upgrade buildozer cython
 
-    - name: Build APK
+    # 5️⃣ Compiler l’APK debug
+    - name: Compiler APK
       run: |
         cd $GITHUB_WORKSPACE
         buildozer android debug
 
+    # 6️⃣ Télécharger l’APK comme artifact
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
