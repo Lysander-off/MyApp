@@ -18,7 +18,7 @@ from kivy.properties import NumericProperty, StringProperty
 from plyer import fingerprint
 
 DEFAULT_NECESSITY_MAP = {
-    "nourriture": 100,
+    "nourriture": 100, 
     "logement": 100,
     "matériel artistique": 80,
     "transport": 70,
