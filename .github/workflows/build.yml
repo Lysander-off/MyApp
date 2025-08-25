@@ -1,0 +1,29 @@
+name: Buildozer APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential git python3 python3-pip \
+            openjdk-17-jdk unzip zlib1g-dev libncurses5-dev libffi-dev \
+            libssl-dev libsqlite3-dev ccache
+
+          pip install --user buildozer cython
+
+      - name: Build APK
+        run: |
+          buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release
+          path: bin/*.apk
